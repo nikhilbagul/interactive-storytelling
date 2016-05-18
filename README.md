@@ -11,7 +11,7 @@ Note: This is a development build.
 Installation instructions : 
 
 1. Download the code repo as .zip file or clone it on your machine.
-2. Download and install Unity from [official Unity website](https://unity3d.com/get-unity)
+2. Download and install Unity from the [official Unity website](https://unity3d.com/get-unity)
 3. Open Unity and select open project option.
 4. Point the new project to the repository we downloaded/cloned earlier.
 5. Hit Play
