@@ -5,7 +5,7 @@ Architecture       : Content Selection Architecture
 Tools for Artwork  : Photoshop
 
 Note: This is a development build. 
-      The game is solely meant for educational and evalution purposes. 
+      The game is solely meant for educational and evaluation purposes. 
       No commerical benefit is intended.
 
 Installation instructions : 
