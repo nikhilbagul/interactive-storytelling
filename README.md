@@ -1,2 +1,2 @@
-# Interactive-Storytelling-CMPM-248-
+# Interactive Storytelling project
 Text based Interactive game made in Unity. 
