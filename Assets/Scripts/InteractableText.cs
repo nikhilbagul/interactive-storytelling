@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using System.Collections;
 
 public class InteractableText : MonoBehaviour {
 
     private Text this_text;
     private Outline whiteGlow;
+   
 	// Use this for initialization
 	void Start () {
 
@@ -35,10 +37,11 @@ public class InteractableText : MonoBehaviour {
 
     public void enableGlow()
     {
-        whiteGlow.effectColor = new Color(255, 255, 255, 0.15f);
+        whiteGlow.effectColor = new Color(255, 255, 255, 0.25f);        
     }
     public void disableGlow()
     {
         whiteGlow.effectColor = new Color(255, 255, 255, 0.0f);
     }
+
 }

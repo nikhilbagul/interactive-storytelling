@@ -8,21 +8,27 @@ public class ContentUnit
     public Sprite background;
     public string titleText;
     public Choice choiceA, choiceB;
+    public Location locationInfo;
+    public string timeStamp;
 
-    public ContentUnit(int newUnitID, Sprite newImage, string newtitleText, Choice newChoiceA, Choice newChoiceB)
+    public ContentUnit(int newUnitID, Sprite newImage, string newtitleText, Choice newChoiceA, Choice newChoiceB , Location newlocationInfo, string newTimeStamp)
     {
         UnitID = newUnitID;
         background = newImage;
         titleText = newtitleText;
         choiceA = newChoiceA;
+        timeStamp = newTimeStamp;
 
         if (newChoiceB !=null)
         {
             choiceB = newChoiceB;
         }
 
-        
-        
+        if (newlocationInfo != null)
+        {
+            locationInfo = newlocationInfo;
+        }
+
     }
 
     public ContentUnit(int newUnitID)
@@ -42,4 +48,18 @@ public class Choice
         choiceText = newText;
         nextUnitID = newNextUnitID;
     }
+}
+
+public class Location
+{
+    public string place, address, city;
+
+    public Location(string newplace, string newaddress, string newcity)
+    {
+        place = newplace;
+        address = newaddress;
+        city = newcity;
+    }
+
+    
 }
