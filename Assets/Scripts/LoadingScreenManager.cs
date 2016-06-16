@@ -8,7 +8,7 @@ public class LoadingScreenManager : MonoBehaviour {
     public Transform ChapterThumbnail_transform;
     public Transform ChapterThumbnail_goToTransform;
     public Image loadingScreenBG, ChapterThumbnail;
-    public Image loadingBar1, loadingBar2;
+    public Image loadingBar1, loadingBar2, loadingBar3;
     public Image ChapterThumbnail_hoverstate;
     public CanvasGroup LoadingScreenCanvas;
 
@@ -40,6 +40,7 @@ public class LoadingScreenManager : MonoBehaviour {
 
     void fillLoadingBar()
     {
+        loadingBar3.DOFade(1.0f, 0.5f);
         loadingBar1.DOFillAmount(1.0f, 5.0f);
         loadingBar2.DOFillAmount(1.0f, 5.0f).OnComplete(activateHoverStateAnimation);
     }
@@ -57,12 +58,12 @@ public class LoadingScreenManager : MonoBehaviour {
 
     void loadingScreen_fadeOut()
     {
-        LoadingScreenCanvas.interactable = false;
         loadingScreenBG.DOFade(0.0f, 0.4f);
         ChapterThumbnail.DOFade(0.0f, 0.4f);
         ChapterThumbnail_hoverstate.DOFade(0.0f, 0.4f);
-        loadingBar2.DOFade(0.0f, 0.4f);
-        loadingBar1.DOFade(0.0f, 0.4f).OnComplete(disableLoadingScreenInputs);
+        loadingBar2.DOFillAmount(0.0f, 0.2f);
+        loadingBar1.DOFillAmount(0.0f, 0.2f);
+        loadingBar3.DOFade(0.0f, 0.4f).OnComplete(disableLoadingScreenInputs);
     }
 
     void disableLoadingScreenInputs()

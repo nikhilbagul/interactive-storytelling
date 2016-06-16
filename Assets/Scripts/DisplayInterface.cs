@@ -10,7 +10,7 @@ public class DisplayInterface : MonoBehaviour {
     public Text targetChoice_AText;
     public Text targetChoice_BText;
     public Text targetPlace, targetAddress, targetCity, targetTime;
-    public CanvasGroup contentUnit_canvasgroup;
+    public CanvasGroup mainChapter_canvas, locationInfo_canvas;
  
 
     private Sequence fadeComponents;
@@ -29,7 +29,8 @@ public class DisplayInterface : MonoBehaviour {
 	
 	public void displayContentUnit(ContentUnit activeContentUnitToDisplay)       //Fetch the Content from the current Content Unit to Display
     {
-
+        locationInfo_canvas.DOFade(1.0f, 0.5f);
+        mainChapter_canvas.DOFade(1.0f, 0.5f);
         print("Fade begins");
         fadeComponents = DOTween.Sequence();
 
@@ -103,10 +104,11 @@ public class DisplayInterface : MonoBehaviour {
     
     public void onFadeComplete()
     {
-        contentUnit_canvasgroup.blocksRaycasts = true;
-        print("Fade complete");
-        
+        mainChapter_canvas.blocksRaycasts = true;
+        print("Fade complete");        
     }
+
+   
     
 
 
