@@ -9,16 +9,18 @@ public class SelectionMechanism : MonoBehaviour
     public ContentUnit activeContentUnit;
     public CanvasGroup contentUnit_canvasgroup;
     private int currentUnitID;
-    
+
+    public delegate void PostChoiceInputEvent();
+    public static event PostChoiceInputEvent PostChoiceInputEventCall;
 
     void Start()
     {
-
+        currentUnitID = 0;
     }
 
     void OnEnable()
     {
-        InteractableChapterSelectBox.loadChapterContentsCall += StartSelectionMechanism;
+        InteractableChapterSelectBox.loadChapterContentsCall += StartSelectionMechanism;        
     }
 
 
@@ -29,8 +31,7 @@ public class SelectionMechanism : MonoBehaviour
 
     void StartSelectionMechanism()
     {
-        activeContentUnit = PopulateStoryGraph.StoryGraph[0];                    // Initialises the First Content Unit to Display
-        //currentUnitID = activeContentUnit.UnitID;
+        activeContentUnit = PopulateStoryGraph.StoryGraph[currentUnitID];                    // Initialises the First Content Unit to Display
         refObj.displayContentUnit(activeContentUnit);
     }
 
@@ -41,12 +42,25 @@ public class SelectionMechanism : MonoBehaviour
         contentUnit_canvasgroup.blocksRaycasts = false;                         
         activeContentUnit = PopulateStoryGraph.StoryGraph[activeContentUnit.choiceA.nextUnitID];
         refObj.displayContentUnit(activeContentUnit);
+        currentUnitID = activeContentUnit.UnitID;
+
+        if (PostChoiceInputEventCall != null)
+        {
+            PostChoiceInputEventCall();
+        }
     }
 
     public void userChoiceBHandler()
     {
         activeContentUnit = PopulateStoryGraph.StoryGraph[activeContentUnit.choiceB.nextUnitID];
         refObj.displayContentUnit(activeContentUnit);
+        currentUnitID = activeContentUnit.UnitID;
+        //print("current unit ID is : " + currentUnitID);
+
+        if (PostChoiceInputEventCall != null)
+        {
+            PostChoiceInputEventCall();
+        }
     }
 
     public void userTitleClickHandler()

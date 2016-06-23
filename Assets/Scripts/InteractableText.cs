@@ -44,4 +44,6 @@ public class InteractableText : MonoBehaviour {
         whiteGlow.effectColor = new Color(255, 255, 255, 0.0f);
     }
 
+
+
 }

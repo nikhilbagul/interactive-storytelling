@@ -42,17 +42,31 @@ public class LoadingScreenManager : MonoBehaviour {
     {
         loadingBar3.DOFade(1.0f, 0.5f);
         loadingBar1.DOFillAmount(1.0f, 5.0f);
-        loadingBar2.DOFillAmount(1.0f, 5.0f).OnComplete(activateHoverStateAnimation);
+        loadingBar2.DOFillAmount(1.0f, 5.0f).OnComplete(scaleLoadingBar);
+    }
+    
+    void scaleLoadingBar()
+    {
+        loadingBar1.transform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), 0.5f);
+        loadingBar1.DOFade(0.0f, 1.0f);
+        loadingBar2.transform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), 0.5f);
+        loadingBar2.DOFade(0.0f, 1.0f);
+        loadingBar3.DOFade(0.0f, 1.0f);
+        loadingBar3.transform.DOScale(new Vector3(1.1f, 1.1f, 1.0f), 0.5f).OnComplete(enableLoadingScreenInputs);
+
     }
 
-    void activateHoverStateAnimation()
+    void enableLoadingScreenInputs()
     {
-        ChapterThumbnail_hoverstate.DOFade(1.0f, 0.5f).OnComplete(deactivateHoverStateAnimation);
-    }
+        loadingBar1.fillAmount = 0.0f;
+        loadingBar2.fillAmount = 0.0f;
+        loadingBar1.DOFade(1.0f, 0.5f);
+        loadingBar2.DOFade(1.0f, 0.5f);
 
-    void deactivateHoverStateAnimation()
-    {
-        ChapterThumbnail_hoverstate.DOFade(0.0f, 0.5f);
+        loadingBar1.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.5f);         //scale back loading bar icons to normal size
+        loadingBar2.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.5f);
+        loadingBar3.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.5f);
+
         LoadingScreenCanvas.blocksRaycasts = true;
     }
 
@@ -60,10 +74,8 @@ public class LoadingScreenManager : MonoBehaviour {
     {
         loadingScreenBG.DOFade(0.0f, 0.4f);
         ChapterThumbnail.DOFade(0.0f, 0.4f);
-        ChapterThumbnail_hoverstate.DOFade(0.0f, 0.4f);
-        loadingBar2.DOFillAmount(0.0f, 0.2f);
-        loadingBar1.DOFillAmount(0.0f, 0.2f);
-        loadingBar3.DOFade(0.0f, 0.4f).OnComplete(disableLoadingScreenInputs);
+        ChapterThumbnail_hoverstate.DOFade(0.0f, 0.4f).OnComplete(disableLoadingScreenInputs);
+      
     }
 
     void disableLoadingScreenInputs()

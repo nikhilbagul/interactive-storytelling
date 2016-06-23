@@ -10,6 +10,7 @@ public class ContentUnit
     public Choice choiceA, choiceB;
     public Location locationInfo;
     public string timeStamp;
+    //public AudioClip audio_clip;
 
     public ContentUnit(int newUnitID, Sprite newImage, string newtitleText, Choice newChoiceA, Choice newChoiceB , Location newlocationInfo, string newTimeStamp)
     {

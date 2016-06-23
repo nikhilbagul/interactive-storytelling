@@ -31,7 +31,7 @@ public class DisplayInterface : MonoBehaviour {
     {
         locationInfo_canvas.DOFade(1.0f, 0.5f);
         mainChapter_canvas.DOFade(1.0f, 0.5f);
-        print("Fade begins");
+       
         fadeComponents = DOTween.Sequence();
 
         targetImage.sprite = activeContentUnitToDisplay.background;
@@ -104,8 +104,8 @@ public class DisplayInterface : MonoBehaviour {
     
     public void onFadeComplete()
     {
-        mainChapter_canvas.blocksRaycasts = true;
-        print("Fade complete");        
+        if(!fadeComponents.IsPlaying())
+        mainChapter_canvas.blocksRaycasts = true;       
     }
 
    
