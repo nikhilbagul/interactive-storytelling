@@ -9,6 +9,7 @@ public class SelectionMechanism : MonoBehaviour
     public ContentUnit activeContentUnit;
     public CanvasGroup contentUnit_canvasgroup;
     private int currentUnitID;
+    
 
     public delegate void PostChoiceInputEvent();
     public static event PostChoiceInputEvent PostChoiceInputEventCall;
@@ -16,6 +17,7 @@ public class SelectionMechanism : MonoBehaviour
     void Start()
     {
         currentUnitID = 0;
+        
     }
 
     void OnEnable()

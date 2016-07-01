@@ -1,38 +1,56 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using DG.Tweening;
 using System.Collections;
 
 public class Gameplay_audioManager : MonoBehaviour
 {
-    public AudioMixerSnapshot PreInputStageAudio;
-    public AudioSource PreInputStageAudio_clip;
+    public AudioMixerSnapshot MasterMute, Contentunit_audioSnapshot;
+    public AudioMixer GameplayAudioMixer;
+    public AudioSource Chapter_contentaudio;
 
     void OnEnable()
     {
-        InteractableChapterSelectBox.loadChapterContentsCall += ContentUnit_audio_snapshotSwitcher_PreInput;
-        SelectionMechanism.PostChoiceInputEventCall += ContentUnit_audio_snapshotSwitcher_PostInput;
+        InteractableChapterSelectBox.loadChapterContentsCall += LoadChapterAudio;
+        SelectionMechanism.PostChoiceInputEventCall += FadeoutAudio;
     }
 
 
     void OnDisable()
     {
-        InteractableChapterSelectBox.loadChapterContentsCall -= ContentUnit_audio_snapshotSwitcher_PreInput;
-        SelectionMechanism.PostChoiceInputEventCall -= ContentUnit_audio_snapshotSwitcher_PostInput;
-    }
+        InteractableChapterSelectBox.loadChapterContentsCall -= LoadChapterAudio;
+        SelectionMechanism.PostChoiceInputEventCall -= FadeoutAudio;
+    }   
 
-    void ContentUnit_audio_snapshotSwitcher_PreInput()
+    void LoadChapterAudio()
     {
-        if(!PreInputStageAudio_clip.isPlaying)
+        if (!Chapter_contentaudio.isPlaying)
         {
-            PreInputStageAudio_clip.Play();
-            PreInputStageAudio.TransitionTo(2.0f);
+            Chapter_contentaudio.Play();
+            Contentunit_audioSnapshot.TransitionTo(5.0f);
+            //GameplayAudioMixer.DOSetFloat("MasterVol", 0.0f, 1.0f);
         }
+             
     }
 
     void ContentUnit_audio_snapshotSwitcher_PostInput()
     {
-
+        
+        Chapter_contentaudio.Play();
+        //Contentunit_audioSnapshot.TransitionTo(3.0f);
+        GameplayAudioMixer.DOSetFloat("MasterVol", 0.0f, 3.0f);
     }
+
+    void FadeoutAudio()
+    {
+        if(DisplayInterface.changeChapterAudio)
+        {
+            print("change audio clip !");
+            GameplayAudioMixer.DOSetFloat("MasterVol", -80.0f, 3.0f).OnComplete(ContentUnit_audio_snapshotSwitcher_PostInput);
+            //Chapter_contentaudio.PlayScheduled(AudioSettings.dspTime + 2);
+        }
+    }
+
 
 
 

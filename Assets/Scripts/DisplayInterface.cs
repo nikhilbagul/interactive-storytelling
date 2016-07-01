@@ -7,14 +7,17 @@ public class DisplayInterface : MonoBehaviour {
 
     public Image targetImage;
     public Text targetTitleText;
+    public Text target_SupportingText;
     public Text targetChoice_AText;
     public Text targetChoice_BText;
+    public Text targetChoice_AText_center;
     public Text targetPlace, targetAddress, targetCity, targetTime;
     public CanvasGroup mainChapter_canvas, locationInfo_canvas;
- 
+    public AudioSource target_audioSource;
+    
 
     private Sequence fadeComponents;
-
+    public static bool changeChapterAudio;
 
     [Range(1, 5)]
     public float lerpTime = 1f;
@@ -23,12 +26,25 @@ public class DisplayInterface : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        
-        
+        changeChapterAudio = true;
+
     }
 	
 	public void displayContentUnit(ContentUnit activeContentUnitToDisplay)       //Fetch the Content from the current Content Unit to Display
     {
+        if (activeContentUnitToDisplay.contentunit_audioclip != null)
+        {
+            target_audioSource.clip = activeContentUnitToDisplay.contentunit_audioclip;
+            changeChapterAudio = true;
+        }
+
+        else
+        {
+            changeChapterAudio = false;                     //flag to indicate change in the current Content Unit's audio clip
+        }
+        
+       
+
         locationInfo_canvas.DOFade(1.0f, 0.5f);
         mainChapter_canvas.DOFade(1.0f, 0.5f);
        
@@ -43,22 +59,38 @@ public class DisplayInterface : MonoBehaviour {
         targetTitleText.color = new Color(targetTitleText.color.r, targetTitleText.color.g, targetTitleText.color.b, 0);   //make the alpha of the new content unit: 0
         fadeComponents.Insert(2.0f, targetTitleText.DOFade(1.0f, 3f));
 
-        targetChoice_AText.text = activeContentUnitToDisplay.choiceA.choiceText;
-        targetChoice_AText.color = new Color(targetChoice_AText.color.r, targetChoice_AText.color.g, targetChoice_AText.color.b, 0);   //make the alpha of the new content unit: 0
-        fadeComponents.Insert(3.0f, targetChoice_AText.DOFade(1.0f, 3f));
+        target_SupportingText.text = activeContentUnitToDisplay.supporting_text;
+        target_SupportingText.color = new Color(target_SupportingText.color.r, target_SupportingText.color.g, target_SupportingText.color.b, 0);   //make the alpha of the new content unit: 0
+        fadeComponents.Insert(3.0f, target_SupportingText.DOFade(1.0f, 3f));
 
+        
         //Checks if the active Content unit has more than >2 choices
         if (activeContentUnitToDisplay.choiceB == null)
         {
+            targetChoice_AText_center.transform.gameObject.SetActive(true);
             targetChoice_BText.transform.gameObject.SetActive(false);
+            targetChoice_AText.transform.gameObject.SetActive(false);            
+
+            targetChoice_AText_center.text = activeContentUnitToDisplay.choiceA.choiceText;
+            targetChoice_AText_center.color = new Color(targetChoice_AText_center.color.r, targetChoice_AText_center.color.g, targetChoice_AText_center.color.b, 0);   //make the alpha of the new content unit: 0
+            fadeComponents.Insert(4.0f, targetChoice_AText_center.DOFade(1.0f, 3f));
+
             //StartCoroutine(Dialogue_Fader(false));
         }
         else
         {
+            targetChoice_AText_center.transform.gameObject.SetActive(false);
+            targetChoice_BText.transform.gameObject.SetActive(true);
+            targetChoice_AText.transform.gameObject.SetActive(true);
+
+            targetChoice_AText.text = activeContentUnitToDisplay.choiceA.choiceText;
+            targetChoice_AText.color = new Color(targetChoice_AText.color.r, targetChoice_AText.color.g, targetChoice_AText.color.b, 0);   //make the alpha of the new content unit: 0
+            fadeComponents.Insert(4.0f, targetChoice_AText.DOFade(1.0f, 3f));
+
             targetChoice_BText.transform.gameObject.SetActive(true);
             targetChoice_BText.text = activeContentUnitToDisplay.choiceB.choiceText;                
             targetChoice_BText.color = new Color(targetChoice_BText.color.r, targetChoice_BText.color.g, targetChoice_BText.color.b, 0);    //make the alpha of the new content unit: 0
-            fadeComponents.Insert(4.0f, targetChoice_BText.DOFade(1.0f, 3f));
+            fadeComponents.Insert(5.0f, targetChoice_BText.DOFade(1.0f, 3f));
             //StartCoroutine(Dialogue_Fader(true));
         }
 

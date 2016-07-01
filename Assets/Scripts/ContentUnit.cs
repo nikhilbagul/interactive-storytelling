@@ -7,20 +7,22 @@ public class ContentUnit
     public int UnitID;
     public Sprite background;
     public string titleText;
+    public string supporting_text;
     public Choice choiceA, choiceB;
     public Location locationInfo;
     public string timeStamp;
-    //public AudioClip audio_clip;
+    public AudioClip contentunit_audioclip;
 
-    public ContentUnit(int newUnitID, Sprite newImage, string newtitleText, Choice newChoiceA, Choice newChoiceB , Location newlocationInfo, string newTimeStamp)
+    public ContentUnit(int newUnitID, Sprite newImage, string newtitleText, string newSupporting_text, Choice newChoiceA, Choice newChoiceB, Location newlocationInfo, string newTimeStamp)
     {
         UnitID = newUnitID;
         background = newImage;
         titleText = newtitleText;
+        supporting_text = newSupporting_text;
         choiceA = newChoiceA;
         timeStamp = newTimeStamp;
 
-        if (newChoiceB !=null)
+        if (newChoiceB != null)
         {
             choiceB = newChoiceB;
         }
@@ -28,6 +30,15 @@ public class ContentUnit
         if (newlocationInfo != null)
         {
             locationInfo = newlocationInfo;
+        }
+
+    }
+
+    public ContentUnit(AudioClip audioclip)
+    {
+        if(null != audioclip)
+        {
+            contentunit_audioclip = audioclip;
         }
 
     }
