@@ -17,7 +17,7 @@
 4. Point the new project to the repository we downloaded/cloned earlier.
 5. Hit Play
 
-#Unity Ver: 5.3.3f1
+#Unity ver: 5.3.3f1
 
 
 
