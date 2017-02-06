@@ -9,7 +9,7 @@
 <br>The game is solely meant for educational and evaluation purposes. 
 <br>No commerical benefit is intended.</p>
 
-Installation instructions : 
+#Installation instructions : 
 
 1. Download the code repo as .zip file or clone it on your machine.
 2. Download and install Unity from the [official Unity website](https://unity3d.com/get-unity)
