@@ -1,8 +1,8 @@
 # Interactive Storytelling project
-Text based Interactive game made in Unity
-Scripting language : C#
-Architecture       : Content Selection Architecture
-Tools for Artwork  : Photoshop
+<p>Text based Interactive game made in Unity</p>
+<p>Scripting language : C#</p>
+<p>Architecture       : Content Selection Architecture</p>
+<p>Tools for Artwork  : Photoshop</p>
 
 Note: This is a development build. 
       The game is solely meant for educational and evaluation purposes. 
